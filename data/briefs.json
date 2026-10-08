@@ -1,0 +1,30 @@
+{
+  "reference_date": "2027-02-01",
+  "note": "Requests exactly as they reach us from clients. Do not modify them: your system must work with the original text.",
+  "briefs": [
+    {
+      "id": "B01",
+      "text": "Hi! We'd like to do a team building for 10 people in Málaga, we fancy go-karting and then grabbing a bite. Around €80 per person max. It would be a Friday afternoon in March."
+    },
+    {
+      "id": "B02",
+      "text": "Good afternoon, we're organizing the company dinner for our Madrid team. There will be 45 of us, 6 of whom are vegan. Our total budget is 3,000 euros."
+    },
+    {
+      "id": "B03",
+      "text": "something fun for the team in march"
+    },
+    {
+      "id": "B04",
+      "text": "We need go-karting for 40 people in Málaga, the whole staff together. Flexible budget."
+    },
+    {
+      "id": "B05",
+      "text": "OK, so look, there are fifteen of us, in Seville, we want something premium, something people will remember. But our budget is about twenty euros a head, we can't go higher."
+    },
+    {
+      "id": "B06",
+      "text": "Team activity in Bilbao for 12 people, end of May."
+    }
+  ]
+}
