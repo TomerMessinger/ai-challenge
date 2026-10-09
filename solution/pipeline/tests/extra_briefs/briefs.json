@@ -1,0 +1,30 @@
+{
+  "reference_date": "2027-02-01",
+  "note": "Additional local evaluation briefs. These are not part of the official Gaddex challenge inputs and must not be special-cased.",
+  "briefs": [
+    {
+      "id": "X01",
+      "text": "20 people in Barcelona. We want something outdoors and active, ideally competitive. Maximum €75 per person.",
+      "purpose": "Multiple hard-feasible candidates; soft-preference ranking; price is a hard maximum, not the ranking objective.",
+      "expected": "Team sailing regatta outranks the e-bike tour: both are under budget and outdoor/active, but sailing additionally matches competitive."
+    },
+    {
+      "id": "X02",
+      "text": "12 of us in Málaga, looking for something relaxed and indoors after work. Keep it under €40 per person.",
+      "purpose": "Non-mandatory supplier matching using soft tags, capacity and budget.",
+      "expected": "Málaga wine tasting is the strongest natural match."
+    },
+    {
+      "id": "X03",
+      "text": "We have 20 people in Madrid and want a padel activity. Budget is €35 each.",
+      "purpose": "Non-mandatory hard activity/tag matching.",
+      "expected": "Padel tournament with coach matches."
+    },
+    {
+      "id": "X04",
+      "text": "18 people in Seville want to go kayaking in March, maximum €50 per person.",
+      "purpose": "Explicit seasonal hard constraint.",
+      "expected": "Unfulfillable: Guadalquivir Kayak is only available April through October."
+    }
+  ]
+}
