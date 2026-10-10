@@ -47,7 +47,10 @@ Location and group
 - requested_city: the city where the event takes place, as the client wrote it. Keep
   it even if it seems unusual; never replace it with another city.
 - party_size: the total number of attendees as an integer, including numbers
-  written in words.
+  written in words. Required services apply to this full group by default, and
+  supplier capacity is checked against party_size later. How the group is
+  composed, or the fact that it is one group, does not by itself describe a
+  supplier capability.
 
 Budget (amounts in euros)
 - budget_per_person_max is a per-person limit; budget_total_max is a limit for the
@@ -87,11 +90,15 @@ Tags and unmapped requirements
   A subjective quality is a preference unless the client makes it firm: states it
   as a must, or asks for it plainly while softening other wishes in the same
   request ("we want X, ideally Y" makes X firm and Y a preference).
-- unmapped_required_terms: concrete things the client explicitly requires that no
-  canonical tag or service type can represent, such as a named activity missing
-  from the list. Write each as a short term in the client's words ("archery").
-  Never drop such a requirement or replace it with a loosely related tag. Do not
-  put subjective qualities, context, or anything a canonical tag covers here.
+- unmapped_required_terms: only concrete hard requirements on the requested
+  service or supplier capability that fulfillment would have to satisfy, but that
+  neither service_type, the canonical tags nor another field can represent, such
+  as a named activity missing from the list. Write each as a short term in the
+  client's words ("archery"). Never drop such a requirement or replace it with a
+  loosely related tag. Do not put here subjective qualities, circumstances of the
+  client, team, group structure or event context, or anything another field
+  already records (city, party size, dates, budget, diets) or a canonical tag
+  covers.
 - Team building, a team activity, a company event and similar context get no tag;
   none exists for them. Do not add attributes the client did not ask for, even
   ones typical of that kind of service.
