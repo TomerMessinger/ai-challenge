@@ -1,0 +1,48 @@
+{
+  "status": "unfulfillable",
+  "request_met": false,
+  "understanding": {
+    "requested_city": "Bilbao",
+    "party_size": 12,
+    "budget_total_max": null,
+    "budget_per_person_max": null,
+    "date_constraints": {
+      "year": 2027,
+      "month": 5,
+      "weekday": null,
+      "day_of_month": null,
+      "period_of_month": "late",
+      "time_of_day": null
+    },
+    "service_needs": [
+      {
+        "service_type": "activity",
+        "required_tags": [],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      }
+    ],
+    "dietary_requirements": {
+      "vegan_count": null,
+      "vegetarian_count": null
+    },
+    "global_preference_tags": []
+  },
+  "proposal": null,
+  "issues": {
+    "missing_information": [],
+    "unmet_requirements": [
+      {
+        "code": "unsupported_city",
+        "need_index": null,
+        "reasons": [
+          "unsupported_city"
+        ],
+        "terms": []
+      }
+    ],
+    "warnings": []
+  },
+  "error": null
+}

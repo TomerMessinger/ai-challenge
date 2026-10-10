@@ -1,0 +1,68 @@
+{
+  "status": "fulfilled",
+  "request_met": true,
+  "understanding": {
+    "requested_city": "Madrid",
+    "party_size": 45,
+    "budget_total_max": 3000.0,
+    "budget_per_person_max": 66.66,
+    "date_constraints": {
+      "year": null,
+      "month": null,
+      "weekday": null,
+      "day_of_month": null,
+      "period_of_month": null,
+      "time_of_day": null
+    },
+    "service_needs": [
+      {
+        "service_type": "food",
+        "required_tags": [
+          "dinner"
+        ],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      }
+    ],
+    "dietary_requirements": {
+      "vegan_count": 6,
+      "vegetarian_count": null
+    },
+    "global_preference_tags": []
+  },
+  "proposal": {
+    "currency": "EUR",
+    "services": [
+      {
+        "service_id": 10,
+        "need_index": 0,
+        "supplier_name": "Restaurante El Patio",
+        "service_name": "Group dinner in private room",
+        "service_type": "food",
+        "description": "Seated set dinner in the restaurant's private dining room: starters to share, a choice of main course and dessert. A vegan menu option, also suitable for vegetarians, is available.",
+        "quantity": 45,
+        "price_per_person": 48.0,
+        "subtotal": 2160.0
+      }
+    ],
+    "price_per_person": 48.0,
+    "total_price": 2160.0,
+    "preference_match": {
+      "score": 0,
+      "matched": [],
+      "unmatched": []
+    }
+  },
+  "issues": {
+    "missing_information": [],
+    "unmet_requirements": [],
+    "warnings": [
+      {
+        "code": "date_missing",
+        "message": "No date or time of year was specified in the request."
+      }
+    ]
+  },
+  "error": null
+}

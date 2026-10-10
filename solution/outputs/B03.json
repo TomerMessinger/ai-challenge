@@ -1,0 +1,44 @@
+{
+  "status": "needs_information",
+  "request_met": null,
+  "understanding": {
+    "requested_city": null,
+    "party_size": null,
+    "budget_total_max": null,
+    "budget_per_person_max": null,
+    "date_constraints": {
+      "year": 2027,
+      "month": 3,
+      "weekday": null,
+      "day_of_month": null,
+      "period_of_month": null,
+      "time_of_day": null
+    },
+    "service_needs": [
+      {
+        "service_type": null,
+        "required_tags": [],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      }
+    ],
+    "dietary_requirements": {
+      "vegan_count": null,
+      "vegetarian_count": null
+    },
+    "global_preference_tags": [
+      "fun"
+    ]
+  },
+  "proposal": null,
+  "issues": {
+    "missing_information": [
+      "requested_city",
+      "party_size"
+    ],
+    "unmet_requirements": [],
+    "warnings": []
+  },
+  "error": null
+}

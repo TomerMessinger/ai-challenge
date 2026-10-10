@@ -1,0 +1,86 @@
+{
+  "status": "fulfilled",
+  "request_met": true,
+  "understanding": {
+    "requested_city": "Málaga",
+    "party_size": 10,
+    "budget_total_max": 800.0,
+    "budget_per_person_max": 80.0,
+    "date_constraints": {
+      "year": 2027,
+      "month": 3,
+      "weekday": "friday",
+      "day_of_month": null,
+      "period_of_month": null,
+      "time_of_day": "afternoon"
+    },
+    "service_needs": [
+      {
+        "service_type": "activity",
+        "required_tags": [
+          "go_kart"
+        ],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      },
+      {
+        "service_type": "food",
+        "required_tags": [],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      }
+    ],
+    "dietary_requirements": {
+      "vegan_count": null,
+      "vegetarian_count": null
+    },
+    "global_preference_tags": []
+  },
+  "proposal": {
+    "currency": "EUR",
+    "services": [
+      {
+        "service_id": 1,
+        "need_index": 0,
+        "supplier_name": "Karting Costa del Sol",
+        "service_name": "Go-kart Grand Prix (2h)",
+        "service_type": "activity",
+        "description": "Two-hour Grand Prix on an outdoor karting circuit: safety briefing, practice laps, timed qualifying and a final race with podium ceremony.",
+        "quantity": 10,
+        "price_per_person": 55.0,
+        "subtotal": 550.0
+      },
+      {
+        "service_id": 3,
+        "need_index": 1,
+        "supplier_name": "Soho Corner Café",
+        "service_name": "Casual café group menu",
+        "service_type": "food",
+        "description": "Informal all-day group menu at reserved tables in a café in Málaga's Soho district: gourmet sandwiches, seasonal salads, a sweet and one drink per person. Vegetarian options available.",
+        "quantity": 10,
+        "price_per_person": 19.0,
+        "subtotal": 190.0
+      }
+    ],
+    "price_per_person": 74.0,
+    "total_price": 740.0,
+    "preference_match": {
+      "score": 0,
+      "matched": [],
+      "unmatched": []
+    }
+  },
+  "issues": {
+    "missing_information": [],
+    "unmet_requirements": [],
+    "warnings": [
+      {
+        "code": "date_not_exact",
+        "message": "The request does not specify an exact calendar date."
+      }
+    ]
+  },
+  "error": null
+}

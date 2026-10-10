@@ -1,0 +1,84 @@
+{
+  "status": "fulfilled",
+  "request_met": true,
+  "understanding": {
+    "requested_city": "Seville",
+    "party_size": 15,
+    "budget_total_max": 300.0,
+    "budget_per_person_max": 20.0,
+    "date_constraints": {
+      "year": null,
+      "month": null,
+      "weekday": null,
+      "day_of_month": null,
+      "period_of_month": null,
+      "time_of_day": null
+    },
+    "service_needs": [
+      {
+        "service_type": null,
+        "required_tags": [],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      }
+    ],
+    "dietary_requirements": {
+      "vegan_count": null,
+      "vegetarian_count": null
+    },
+    "global_preference_tags": [
+      "premium",
+      "memorable"
+    ]
+  },
+  "proposal": {
+    "currency": "EUR",
+    "services": [
+      {
+        "service_id": 21,
+        "need_index": 0,
+        "supplier_name": "Paseos por Sevilla",
+        "service_name": "Guided walking tour of Santa Cruz (2h)",
+        "service_type": "activity",
+        "description": "Two-hour walk at an easy pace through the Santa Cruz quarter and around the Cathedral and Alcázar with an official local guide. Exteriors only; monument tickets not included.",
+        "quantity": 15,
+        "price_per_person": 14.0,
+        "subtotal": 210.0
+      }
+    ],
+    "price_per_person": 14.0,
+    "total_price": 210.0,
+    "preference_match": {
+      "score": 0,
+      "matched": [],
+      "unmatched": [
+        {
+          "scope": "global",
+          "tag": "premium",
+          "need_index": null
+        },
+        {
+          "scope": "global",
+          "tag": "memorable",
+          "need_index": null
+        }
+      ]
+    }
+  },
+  "issues": {
+    "missing_information": [],
+    "unmet_requirements": [],
+    "warnings": [
+      {
+        "code": "date_missing",
+        "message": "No date or time of year was specified in the request."
+      },
+      {
+        "code": "soft_preferences_unmatched",
+        "message": "The selected proposal does not match all requested soft preferences."
+      }
+    ]
+  },
+  "error": null
+}

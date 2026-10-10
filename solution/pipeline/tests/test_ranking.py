@@ -8,7 +8,14 @@ import pytest
 from pipeline.brief_understanding import BriefUnderstanding
 from pipeline.candidate_search import CandidateSearchResult
 from pipeline.catalog import Service
-from pipeline.ranking import RankedBundle, rank_bundles, select_winner
+from pipeline.ranking import (
+    PreferenceEvaluation,
+    PreferenceRef,
+    RankedBundle,
+    evaluate_preferences,
+    rank_bundles,
+    select_winner,
+)
 
 
 def service(service_id, *, price="10", tags=()) -> Service:
@@ -153,6 +160,108 @@ def test_optional_needs_are_skipped_when_aligning_bundles_with_needs():
         bundles=[[1, 2]],
     )
     assert select_winner(r, cat).preference_score == 2
+
+
+# --- Preference evaluation ------------------------------------------------------------------
+
+def need_ref(tag, need_index) -> PreferenceRef:
+    return PreferenceRef(scope="service_need", tag=tag, need_index=need_index)
+
+
+def global_ref(tag) -> PreferenceRef:
+    return PreferenceRef(scope="global", tag=tag, need_index=None)
+
+
+def evaluate(r: CandidateSearchResult, service_ids, cat) -> PreferenceEvaluation:
+    return evaluate_preferences(service_ids, r.understanding, cat)
+
+
+def test_need_preferences_are_reported_as_matched_or_unmatched_on_their_need():
+    cat = catalog(service(1, tags=["competitive", "fun"]))
+    r = result(need(preferred=["competitive", "fun", "memorable"]), bundles=[[1]])
+    assert evaluate(r, [1], cat) == PreferenceEvaluation(
+        score=2,
+        matched=[need_ref("competitive", 0), need_ref("fun", 0)],
+        unmatched=[need_ref("memorable", 0)],
+    )
+
+
+def test_a_need_preference_is_not_satisfied_by_another_selected_service():
+    cat = catalog(service(1), service(2, tags=["competitive"]))
+    r = result(need(preferred=["competitive"]), need(), bundles=[[1, 2]])
+    assert evaluate(r, [1, 2], cat) == PreferenceEvaluation(
+        score=0, matched=[], unmatched=[need_ref("competitive", 0)]
+    )
+
+
+def test_need_refs_keep_the_original_index_with_optional_needs_interleaved():
+    cat = catalog(service(1, tags=["relaxed"]), service(2))
+    r = result(
+        need(preferred=["premium"], is_required=False),
+        need(preferred=["relaxed"]),
+        need(preferred=["fun"], is_required=False),
+        need(preferred=["premium"]),
+        bundles=[[1, 2]],
+    )
+    assert evaluate(r, [1, 2], cat) == PreferenceEvaluation(
+        score=1, matched=[need_ref("relaxed", 1)], unmatched=[need_ref("premium", 3)]
+    )
+
+
+@pytest.mark.parametrize(
+    ("tags", "matched", "unmatched"),
+    [(["memorable"], [global_ref("memorable")], []), ([], [], [global_ref("memorable")])],
+    ids=["matched", "unmatched"],
+)
+def test_global_preferences_are_reported_as_matched_or_unmatched(tags, matched, unmatched):
+    cat = catalog(service(1, tags=tags))
+    r = result(need(), bundles=[[1]], global_preferences=["memorable"])
+    assert evaluate(r, [1], cat) == PreferenceEvaluation(score=len(matched), matched=matched, unmatched=unmatched)
+
+
+def test_a_global_tag_on_several_services_is_reported_once():
+    cat = catalog(service(1, tags=["memorable"]), service(2, tags=["memorable"]))
+    r = result(need(), need(), bundles=[[1, 2]], global_preferences=["memorable"])
+    assert evaluate(r, [1, 2], cat) == PreferenceEvaluation(score=1, matched=[global_ref("memorable")], unmatched=[])
+
+
+def test_one_tag_as_a_need_and_a_global_preference_is_two_scoped_preferences():
+    cat = catalog(service(1, tags=["fun"]))
+    r = result(need(preferred=["fun"]), bundles=[[1]], global_preferences=["fun"])
+    assert evaluate(r, [1], cat) == PreferenceEvaluation(
+        score=2, matched=[need_ref("fun", 0), global_ref("fun")], unmatched=[]
+    )
+    assert select_winner(r, cat).preference_score == 2
+
+
+def test_evaluation_score_is_the_matched_count_and_the_ranking_score():
+    cat = catalog(
+        service(1, tags=["competitive", "memorable"]),
+        service(2, tags=["premium"]),
+        service(3, tags=["relaxed", "fun"]),
+        service(4),
+    )
+    r = result(
+        need(preferred=["competitive", "relaxed"]),
+        need(preferred=["premium", "fun"]),
+        bundles=[[1, 2], [1, 3], [3, 2], [4, 3], [4, 2]],
+        global_preferences=["memorable", "fun", "casual"],
+    )
+    for bundle in rank_bundles(r, cat):
+        evaluation = evaluate(r, bundle.service_ids, cat)
+        assert evaluation.score == len(evaluation.matched) == bundle.preference_score
+        assert len(evaluation.matched) + len(evaluation.unmatched) == 4 + 3
+
+
+@pytest.mark.parametrize(
+    ("service_ids", "message"),
+    [([1, 2], "required needs"), ([9], "missing from the catalog")],
+    ids=["wrong-length", "unknown-id"],
+)
+def test_evaluation_rejects_a_bundle_that_does_not_fit_the_needs(service_ids, message):
+    r = result(need(), bundles=[[1]])
+    with pytest.raises(ValueError, match=message):
+        evaluate(r, service_ids, catalog(service(1), service(2)))
 
 
 # --- Prices -------------------------------------------------------------------------------

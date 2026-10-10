@@ -12,7 +12,7 @@ from test_candidate_search_benchmarks import AS_OF, BRIEFS
 
 from pipeline.candidate_search import CandidateSearchResult, search_candidates
 from pipeline.catalog import load_catalog
-from pipeline.ranking import RankedBundle, rank_bundles, select_winner
+from pipeline.ranking import RankedBundle, evaluate_preferences, rank_bundles, select_winner
 
 STAGE_C_BUNDLES = {
     "B01": [[1, 3]],
@@ -62,6 +62,13 @@ def test_ranking_and_winner(brief_id, catalog):
     result = stage_c_result(brief_id)
     assert rank_bundles(result, catalog) == expected
     assert select_winner(result, catalog) == expected[0]
+
+
+@pytest.mark.parametrize("brief_id", list(RANKINGS))
+def test_preference_evaluation_agrees_with_every_ranking_score(brief_id, catalog):
+    for bundle in rank_bundles(stage_c_result(brief_id), catalog):
+        evaluation = evaluate_preferences(bundle.service_ids, BRIEFS[brief_id], catalog)
+        assert evaluation.score == len(evaluation.matched) == bundle.preference_score
 
 
 @pytest.mark.parametrize("brief_id", list(RANKINGS))

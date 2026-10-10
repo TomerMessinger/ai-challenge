@@ -1,0 +1,50 @@
+{
+  "status": "unfulfillable",
+  "request_met": false,
+  "understanding": {
+    "requested_city": "Málaga",
+    "party_size": 40,
+    "budget_total_max": null,
+    "budget_per_person_max": null,
+    "date_constraints": {
+      "year": null,
+      "month": null,
+      "weekday": null,
+      "day_of_month": null,
+      "period_of_month": null,
+      "time_of_day": null
+    },
+    "service_needs": [
+      {
+        "service_type": "activity",
+        "required_tags": [
+          "go_kart"
+        ],
+        "preference_tags": [],
+        "unmapped_required_terms": [],
+        "required": true
+      }
+    ],
+    "dietary_requirements": {
+      "vegan_count": null,
+      "vegetarian_count": null
+    },
+    "global_preference_tags": []
+  },
+  "proposal": null,
+  "issues": {
+    "missing_information": [],
+    "unmet_requirements": [
+      {
+        "code": "no_feasible_service",
+        "need_index": 0,
+        "reasons": [
+          "capacity"
+        ],
+        "terms": []
+      }
+    ],
+    "warnings": []
+  },
+  "error": null
+}
